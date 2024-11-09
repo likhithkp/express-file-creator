@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Title and Detail Card</title>
+  <link rel="stylesheet" href="/styles/style.css">
+</head>
+<body>
+
+  <div class="container">
+    <h1>Add Title and Details</h1>
+    
+    <!-- Form to submit title and details to /create -->
+    <form action="/create" method="POST">
+      <div class="form-group">
+        <label for="title">Title</label>
+        <input type="text" id="title" name="title" placeholder="Enter title" required>
+      </div>
+      <div class="form-group">
+        <label for="details">Details</label>
+        <textarea id="details" name="details" rows="4" placeholder="Enter details"></textarea>
+      </div>
+      <div class="form-group">
+        <button type="submit">Add</button>
+      </div>
+    </form>
+  </div>
+
+  <div class="card-container" id="cardContainer">
+    <% if(files.length > 0){ %>
+      <% files.forEach((file) => { %>
+        <div class="card">
+          <h3><%= file %></h3> 
+        </div>
+      <% }) %>
+    <% } else { %>
+      <p>No files available</p>
+    <% } %>
+  </div>
+
+</body>
+</html>
