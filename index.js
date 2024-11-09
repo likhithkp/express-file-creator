@@ -26,12 +26,14 @@ app.get("/", (req, res) => {
 
 app.post("/create", (req, res) => {
     const fileName = req.body.title.split(" ").join("") + ".txt";
-    fs.writeFile(`./files/${fileName}`, req.body.details, (err) => {
-        if(err){
+    const filePath = path.join(fileDir, fileName);
+
+    fs.writeFile(filePath, req.body.details, (err) => {
+        if (err) {
             console.log(err);
             return;
-        };
-        console.log("File created")
+        }
+        console.log(`${fileName} created at ${fileDir}`);
         res.redirect("/");
     });
 });
