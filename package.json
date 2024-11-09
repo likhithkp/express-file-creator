@@ -1,0 +1,14 @@
+{
+  "name": "nodejs-task-manager",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "likhithkp <likhithkpdev@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "dev" : "nodemon index.js"
+  },
+  "dependencies": {
+    "express": "^4.21.1",
+    "nodemon": "^3.1.7"
+  }
+}
