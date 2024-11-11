@@ -32,6 +32,8 @@
       <% files.forEach((file) => { %>
         <div class="card">
           <h3><%= file %></h3> 
+          <a href="/files/<%= file%>">Read more</a> 
+          <a href="/edit/<%= file%>">Edit</a> 
         </div>
       <% }) %>
     <% } else { %>

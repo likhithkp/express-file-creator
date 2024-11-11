@@ -17,23 +17,49 @@ if(!fs.existsSync(fileDir)){
 app.get("/", (req, res) => {
     fs.readdir(fileDir, (err, files) => {
         if(err){
-            console.log(err);
+            console.error(err);
             return;
         };
         res.render("index", {files: files});
     });
 });
 
-app.post("/create", (req, res) => {
+app.get("/files/:filename", (req, res) => {
+    fs.readFile(`./files/${req.params.filename}`, "utf-8", (err, data) => {
+        if(err){
+            console.error(err);
+            return;
+        }
+        res.render("info", {fileName: req.params.filename, fileData: data})
+    })
+});
+
+app.get("/edit/:filename", (req, res) => {
+    res.render("edit", {oldName: req.params.filename})
+});
+
+app.post("/create", (req, res) => { 
     const fileName = req.body.title.split(" ").join("") + ".txt";
     const filePath = path.join(fileDir, fileName);
 
     fs.writeFile(filePath, req.body.details, (err) => {
         if (err) {
-            console.log(err);
+            console.error(err);
             return;
         }
         console.log(`${fileName} created at ${fileDir}`);
+        res.redirect("/");
+    });
+});
+
+app.post("/edit", (req, res) => {
+    fs.rename(`${fileDir}/${req.body.oldName}`, `${fileDir}/${req.body.newName}`, (err) => {
+        console.log(req.body)
+        if (err){
+            console.error(err);
+            return;
+        };
+        console.log("File renamed");
         res.redirect("/");
     });
 });
